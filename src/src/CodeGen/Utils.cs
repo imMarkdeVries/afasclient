@@ -67,8 +67,19 @@ namespace DutchGrit.Afas.CodeGen
                 }
             }
             var result = sb.ToString();
-            //result cannot start with a digit.
-            if (Char.IsDigit(result[0])) { result = "_" + result; }
+
+            // Als result leeg is, gebruik een fallback naam
+            if (string.IsNullOrEmpty(result))
+            {
+                return "_EmptyField";
+            }
+
+            // Result mag niet beginnen met een cijfer
+            if (Char.IsDigit(result[0]))
+            {
+                result = "_" + result;
+            }
+
             return result;
         }
 
